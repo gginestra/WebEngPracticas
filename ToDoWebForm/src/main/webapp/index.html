@@ -1,0 +1,29 @@
+<html>
+<head>
+<title>To do</title>
+</head>
+<body>
+	<h1>Add To do</h1>
+	<hr>
+	<form method="post" action="add">
+		Task: <input size = "20" type = "text" name = "task"/>
+		Context: <input size = "20" type = "text" name = "context"/>
+		Project: <input size = "20" type = "text" name = "project"/>
+		Priority: <input size = "20" type = "text" name = "priority"/>
+		<input type="submit" value="Submit">
+	</form>
+	
+	<h1>Search To do</h1>
+	<hr>
+	
+	<form method="post" action="search">
+	<input type="radio" name="searchBy" value="task">Task<br>
+	<input type="radio" name="searchBy" value="context">Context<br>
+	<input type="radio" name="searchBy" value="project">Project<br>
+	<input type="radio" name="searchBy" value="priority">Priority<br>
+	Text : <input size = "20" type = "text" name = "text"/>
+	<input type="submit" value="Submit">
+	</form>
+		
+</body>
+</html>
