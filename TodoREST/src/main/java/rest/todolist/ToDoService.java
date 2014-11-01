@@ -19,14 +19,14 @@ import javax.ws.rs.core.UriInfo;
  * A service that manipulates contacts in an address book.
  *
  */
-@Path("/contacts")
+@Path("/todo")
 public class ToDoService {
 
 	/**
 	 * The (shared) address book object. 
 	 */
 	@Inject
-	AddressBook addressBook;
+	ToDoList todolist;
 
 	/**
 	 * A GET /contacts request should return the address book in JSON.
@@ -34,8 +34,8 @@ public class ToDoService {
 	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public AddressBook getAddressBook() {
-		return addressBook;
+	public ToDoList getToDoList() {
+		return todolist;
 	}
 
 	/**
@@ -46,11 +46,11 @@ public class ToDoService {
 	 */
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response addPerson(@Context UriInfo info, Person person) {
-		addressBook.getPersonList().add(person);
-		person.setId(addressBook.nextId());
-		person.setHref(info.getAbsolutePathBuilder().path("person/{id}").build(person.getId()));
-		return Response.created(person.getHref()).entity(person).build();
+	public Response addTask(@Context UriInfo info, ToDoItem item) {
+		todolist.getToDoList().add(item);
+		item.setId(todolist.nextId());
+		item.setHref(info.getAbsolutePathBuilder().path("item/{id}").build(item.getId()));
+		return Response.created(item.getHref()).entity(item).build();
 	}
 
 	/**
@@ -59,12 +59,12 @@ public class ToDoService {
 	 * @return a JSON representation of the new entry or 404
 	 */
 	@GET
-	@Path("/person/{id}")
+	@Path("/task/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getPerson(@PathParam("id") int id) {
-		for (Person p : addressBook.getPersonList()) {
-			if (p.getId() == id) {
-				return Response.ok(p).build();
+	public Response getTask(@PathParam("id") int id) {
+		for (ToDoItem item : todolist.getToDoList()) {
+			if (item.getId() == id) {
+				return Response.ok(item).build();
 			}
 		}
 		return Response.status(Status.NOT_FOUND).build();
@@ -78,16 +78,16 @@ public class ToDoService {
 	 * @return a JSON representation of the new updated entry or 400 if the id is not a key
 	 */
 	@PUT
-	@Path("/person/{id}")
+	@Path("/task/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response updatePerson(@Context UriInfo info,
-			@PathParam("id") int id, Person person) {
-		for (int i = 0; i < addressBook.getPersonList().size(); i++) {
-			if (addressBook.getPersonList().get(i).getId() == id) {
-				person.setId(id);
-				person.setHref(info.getAbsolutePath());
-				addressBook.getPersonList().set(i, person);
-				return Response.ok(person).build();
+	public Response updateTask(@Context UriInfo info,
+			@PathParam("id") int id, ToDoItem item) {
+		for (int i = 0; i < todolist.getToDoList().size(); i++) {
+			if (todolist.getToDoList().get(i).getId() == id) {
+				item.setId(id);
+				item.setHref(info.getAbsolutePath());
+				todolist.getToDoList().set(i, item);
+				return Response.ok(item).build();
 			}
 		}
 		return Response.status(Status.BAD_REQUEST).build();
@@ -99,12 +99,12 @@ public class ToDoService {
 	 * @return 204 if the request is successful, 404 if the id is not a key
 	 */
 	@DELETE
-	@Path("/person/{id}")
+	@Path("/task/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response updatePerson(@PathParam("id") int id) {
-		for (int i = 0; i < addressBook.getPersonList().size(); i++) {
-			if (addressBook.getPersonList().get(i).getId() == id) {
-				addressBook.getPersonList().remove(i);
+	public Response updateTask(@PathParam("id") int id) {
+		for (int i = 0; i < todolist.getToDoList().size(); i++) {
+			if (todolist.getToDoList().get(i).getId() == id) {
+				todolist.getToDoList().remove(i);
 				return Response.noContent().build();
 			}
 		}

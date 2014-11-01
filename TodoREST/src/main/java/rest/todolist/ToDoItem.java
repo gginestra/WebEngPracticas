@@ -5,6 +5,15 @@ import java.net.URI;
 public class ToDoItem {
 
 	private String task;
+	private int id;  
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	private String context;
 	private String project;
 	private String priority;
