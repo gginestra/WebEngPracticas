@@ -10,7 +10,7 @@ public class ApplicationConfig extends ResourceConfig {
      * Default constructor
      */
     public ApplicationConfig() {
-    	this(new AddressBook());
+    	this(new ToDoList());
     }
 
 
@@ -18,15 +18,14 @@ public class ApplicationConfig extends ResourceConfig {
      * Main constructor
      * @param addressBook a provided address book
      */
-    public ApplicationConfig(final AddressBook addressBook) {
+    public ApplicationConfig(final ToDoList toDoList) {
     	register(ToDoService.class);
     	register(MOXyJsonProvider.class);
     	register(new AbstractBinder() {
 
 			@Override
 			protected void configure() {
-				bind(addressBook).to(AddressBook.class);
+				bind(toDoList).to(ToDoList.class);
 			}});
-	}	
-
+	}
 }

@@ -16,8 +16,8 @@ dependencies {
 
 task server(type: JavaExec) {
 	standardInput 	= System.in  
-    group 			= 'Addressbook Service'
+    group 			= 'ToDoList Service'
     description 	= 'Start a REST endpoint'
-    main 			= 'rest.addressbook.Server'
+    main 			= 'rest.todolist.Server'
 	classpath 		= sourceSets.main.runtimeClasspath
 }
