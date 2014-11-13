@@ -15,6 +15,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
+
 /**
  * A service that manipulates contacts in an address book.
  *
@@ -99,16 +100,42 @@ public class ToDoService {
 	 * @return 204 if the request is successful, 404 if the id is not a key
 	 */
 	@DELETE
-	@Path("/task/{id}")
+	@Path("/task/{by}/{keyword}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response updateTask(@PathParam("id") int id) {
-		for (int i = 0; i < todolist.getToDoList().size(); i++) {
-			if (todolist.getToDoList().get(i).getId() == id) {
-				todolist.getToDoList().remove(i);
-				return Response.noContent().build();
+	public Response updateTask(@PathParam("by") String by,@PathParam("keyword") String keyword ) {
+		int  borrado = 0; 
+		for (ToDoItem item : todolist.getToDoList()) {
+			
+			if(by.equals("task")){
+				if(item.getTask().contains(keyword)){
+					todolist.getToDoList().remove(item);
+					borrado = 1; 
+				}							
+			}else if(by.equals("project")){
+				if(item.getProject().contains(keyword)){
+					todolist.getToDoList().remove(item);
+					borrado = 1;
+				} 
+			}else if(by.equals("context")){
+				if(item.getContext().contains(keyword)){
+					todolist.getToDoList().remove(item);
+					borrado = 1;
+				} 
+			}else if(by.equals("priority")){
+				if(item.getPriority().contains(keyword)){
+					todolist.getToDoList().remove(item);
+					borrado = 1;
+				} 
 			}
+			
 		}
-		return Response.status(Status.NOT_FOUND).build();
+		if(borrado==1){
+			return Response.status(Status.OK).build();
+			
+		}else{
+			return Response.status(Status.NOT_FOUND).build();
+		
+		}
 	}
 
 }

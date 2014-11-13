@@ -6,6 +6,12 @@ public class ToDoItem {
 
 	private String task;
 	private int id;  
+	private String context;
+	private String project;
+	private String priority;
+	private URI href;
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -13,11 +19,6 @@ public class ToDoItem {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	private String context;
-	private String project;
-	private String priority;
-	private URI href;
 	
 	public URI getHref() {
 		return href;

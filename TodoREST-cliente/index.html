@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<link href="css/style.css" rel="stylesheet">
+	<head>
+		<title>To do</title>
+	</head>
+	<body>
+		<h1>Add To do</h1>
+		<div id="addTodo">
+			Task: <input size = "20" type = "text" id = "task" />
+			Context: <input size = "20" type = "text" id = "context"/>
+			Project: <input size = "20" type = "text" id = "project"/>
+			Priority: <input size = "20" type = "text" id = "priority"/>
+			<button id="addButton">Add To do</button>
+			<h4 class= "error"></h4>
+		</div>
+		<hr>
+		<h1>Delete To do</h1>
+		
+		<div id = "deleteTodo">
+			<form name ="fby">
+				<input type="radio" id="by" value="task" name="by">Task<br>
+				<input type="radio" id="by" value="context" name="by">Context<br>
+				<input type="radio" id="by" value="project" name="by">Project<br>
+				<input type="radio" id="by" value="priority" name="by">Priority<br>
+			</form>
+			Text : <input size = "20" type = "text" name = "text" id="text"/>
+			<button id="deleteButton">Delete To do</button>
+			<h4 class= "error"></h4>
+		</div>
+		<hr>
+		<div class="fixedHeaderTable">
+			<h1>List To do</h1>
+			<table  id="listToDo">
+				<thead>
+					<tr>
+						<th>Name</th><th>Project</th><th>Context</th><th>Priority</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+		<hr>
+			
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="js/todoApp.js"></script>
+	</body>
+</html>
