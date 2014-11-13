@@ -59,15 +59,15 @@ public class TodoWebService {
 							toDoList_final.addItem(item);
 						}							
 					}else if(by.equals("project")){
-						if(!item.project.contains(keyword)){
+						if(!item.getProject().contains(keyword)){
 							toDoList_final.addItem(item);
 						} 
 					}else if(by.equals("context")){
-						if(!item.context.contains(keyword)){
+						if(!item.getContext().contains(keyword)){
 							toDoList_final.addItem(item);
 						} 
 					}else if(by.equals("priority")){
-						if(!item.priority.contains(keyword)){
+						if(!item.getPriority().contains(keyword)){
 							toDoList_final.addItem(item);
 						} 
 					}
@@ -106,15 +106,15 @@ public class TodoWebService {
 							toDoList_response.addItem(item);
 						}							
 					}else if(by.equals("project")){
-						if(!item.project.contains(keyword)){
+						if(!item.getProject().contains(keyword)){
 							toDoList_response.addItem(item);
 						} 
 					}else if(by.equals("context")){
-						if(!item.context.contains(keyword)){
+						if(!item.getContext().contains(keyword)){
 							toDoList_response.addItem(item);
 						} 
 					}else if(by.equals("priority")){
-						if(!item.priority.contains(keyword)){
+						if(!item.getPriority().contains(keyword)){
 							toDoList_response.addItem(item);
 						} 
 					}

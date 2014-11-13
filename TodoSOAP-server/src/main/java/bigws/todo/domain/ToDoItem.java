@@ -2,16 +2,16 @@ package bigws.todo.domain;
 
 public class ToDoItem {
 
-	public String task;
-	public String context;
-	public String project;
-	public String priority;
+	private String task;
+	private String context;
+	private String project;
+	private String priority;
 	
 	public ToDoItem(String t, String c, String pro, String pri){
-		task = t;
-		context = c;
-		project = pro;
-		priority = pri; 
+		this.task = t;
+		this.context = c;
+		this.project = pro;
+		this.priority = pri; 
 		
 	}
 	
@@ -22,32 +22,32 @@ public class ToDoItem {
 		return task;
 	}
 	
-	public void setTask(String task) {
-		this.task = task;
+	public void setTask(String intask) {
+		this.task = intask;
 	}
 	
 	public String getContext() {
-		return context;
+		return this.context;
 	}
 	
-	public void setContext(String context) {
-		this.context = context;
+	public void setContext(String incontext) {
+		this.context = incontext;
 	}
 	
 	public String getProject() {
-		return project;
+		return this.project;
 	}
 	
-	public void setProject(String project) {
-		this.project = project;
+	public void setProject(String inproject) {
+		this.project = inproject;
 	}
 	
 	public String getPriority() {
-		return priority;
+		return this.priority;
 	}
 	
-	public void setPriority(String priority) {
-		this.priority = priority;
+	public void setPriority(String inpriority) {
+		this.priority = inpriority;
 	}
 	
 }
