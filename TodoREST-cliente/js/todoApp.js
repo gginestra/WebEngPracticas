@@ -18,6 +18,8 @@ function deleteTask(by,keyword){
 		url: URI + "/task/" + by + "/" + keyword,
 		type: 'DELETE',
 		success: function(){
+			console.log("SUCCESS");
+			$('#listToDo').find('tbody').find('tr').remove();
 			getList();
 		},
 		error : function(error){
@@ -80,6 +82,7 @@ function deleteButton(){
 		
 		if(($('#text').val().length != 0) && (i<4)){
 			var by = document.fby.by[i].value;
+			console.log("selected radio:  " + by);
 			deleteTask(by,keyword);
 			document.fby.by[i].checked = null;
 			$('#text').val('');

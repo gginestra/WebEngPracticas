@@ -103,39 +103,35 @@ public class ToDoService {
 	@Path("/task/{by}/{keyword}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response updateTask(@PathParam("by") String by,@PathParam("keyword") String keyword ) {
-		int  borrado = 0; 
+		boolean borrado = false;
 		for (ToDoItem item : todolist.getToDoList()) {
-			
 			if(by.equals("task")){
-				if(item.getTask().contains(keyword)){
+				if(item.getTask().equals(keyword)){
 					todolist.getToDoList().remove(item);
-					borrado = 1; 
+					borrado = true;
 				}							
 			}else if(by.equals("project")){
-				if(item.getProject().contains(keyword)){
+				if(item.getProject().equals(keyword)){
 					todolist.getToDoList().remove(item);
-					borrado = 1;
+					borrado = true;
 				} 
 			}else if(by.equals("context")){
-				if(item.getContext().contains(keyword)){
+				if(item.getContext().equals(keyword)){
 					todolist.getToDoList().remove(item);
-					borrado = 1;
+					borrado = true;
 				} 
 			}else if(by.equals("priority")){
-				if(item.getPriority().contains(keyword)){
+				if(item.getPriority().equals(keyword)){
 					todolist.getToDoList().remove(item);
-					borrado = 1;
+					borrado = true;
 				} 
 			}
-			
+			if( borrado ){
+				return Response.status(Status.OK).build();
+			}
 		}
-		if(borrado==1){
-			return Response.status(Status.OK).build();
-			
-		}else{
-			return Response.status(Status.NOT_FOUND).build();
+		return Response.status(Status.NOT_FOUND).build();
 		
-		}
 	}
 
 }
