@@ -1,0 +1,59 @@
+<!--
+ Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.2.8 svn-revision#13980. 
+-->
+<xs:schema xmlns:tns="http://service.todo.bigws/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://service.todo.bigws/">
+<xs:element name="addTodo" type="tns:addTodo"/>
+<xs:element name="addTodoResponse" type="tns:addTodoResponse"/>
+<xs:element name="listTodo" type="tns:listTodo"/>
+<xs:element name="listTodoResponse" type="tns:listTodoResponse"/>
+<xs:element name="removeTodo" type="tns:removeTodo"/>
+<xs:element name="removeTodoResponse" type="tns:removeTodoResponse"/>
+<xs:complexType name="addTodo">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+<xs:element name="arg2" type="xs:string" minOccurs="0"/>
+<xs:element name="arg3" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="addTodoResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:toDoItem" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="toDoItem">
+<xs:sequence>
+<xs:element name="context" type="xs:string" minOccurs="0"/>
+<xs:element name="priority" type="xs:string" minOccurs="0"/>
+<xs:element name="project" type="xs:string" minOccurs="0"/>
+<xs:element name="task" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="removeTodo">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="removeTodoResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="listTodo">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="listTodoResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:toDoList" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="toDoList">
+<xs:sequence>
+<xs:element name="toDoList" type="tns:toDoItem" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
