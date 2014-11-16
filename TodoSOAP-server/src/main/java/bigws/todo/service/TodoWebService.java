@@ -87,7 +87,7 @@ public class TodoWebService {
 			System.out.println("**File Not Found");
 		}
 			
-		return "Todo whith " + by + "was " + keyword + "has been deleted";
+		return "Todo's with \"" + by + "\": \"" + keyword + "\", has been deleted";
 	}
 	
 	@WebMethod()
@@ -102,19 +102,19 @@ public class TodoWebService {
 				for (ToDoItem item : toDoList.getToDoList()) {
 					
 					if(by.equals("task")){
-						if(!item.getTask().contains(keyword)){
+						if(item.getTask().contains(keyword)){
 							toDoList_response.addItem(item);
 						}							
 					}else if(by.equals("project")){
-						if(!item.getProject().contains(keyword)){
+						if(item.getProject().contains(keyword)){
 							toDoList_response.addItem(item);
 						} 
 					}else if(by.equals("context")){
-						if(!item.getContext().contains(keyword)){
+						if(item.getContext().contains(keyword)){
 							toDoList_response.addItem(item);
 						} 
 					}else if(by.equals("priority")){
-						if(!item.getPriority().contains(keyword)){
+						if(item.getPriority().contains(keyword)){
 							toDoList_response.addItem(item);
 						} 
 					}
