@@ -42,7 +42,7 @@ sourceSets.main.java.srcDirs += wsdl.wsimport.sourceDestinationDirectory
 compileJava.dependsOn wsimport 
 
 //
-// Required by XJC because helloWorld.xsd is a file
+// Required by XJC because ToDo.xsd is a file
 //
 
 System.setProperty('javax.xml.accessExternalSchema', 'all')

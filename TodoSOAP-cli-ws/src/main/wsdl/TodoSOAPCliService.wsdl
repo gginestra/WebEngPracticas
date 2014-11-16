@@ -7,15 +7,9 @@
 <definitions xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://service.todo.bigws/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://service.todo.bigws/" name="TodoWebServiceService">
 <types>
 <xsd:schema>
-<xsd:import namespace="http://service.todo.bigws/" schemaLocation="http://localhost:8080/todoSOAP?xsd=1"/>
+<xsd:import namespace="http://service.todo.bigws/" schemaLocation="http://localhost:8081/todoSOAP?xsd=1"/>
 </xsd:schema>
 </types>
-<message name="addTodo">
-<part name="parameters" element="tns:addTodo"/>
-</message>
-<message name="addTodoResponse">
-<part name="parameters" element="tns:addTodoResponse"/>
-</message>
 <message name="removeTodo">
 <part name="parameters" element="tns:removeTodo"/>
 </message>
@@ -28,11 +22,13 @@
 <message name="listTodoResponse">
 <part name="parameters" element="tns:listTodoResponse"/>
 </message>
+<message name="addTodo">
+<part name="parameters" element="tns:addTodo"/>
+</message>
+<message name="addTodoResponse">
+<part name="parameters" element="tns:addTodoResponse"/>
+</message>
 <portType name="TodoWebService">
-<operation name="addTodo">
-<input wsam:Action="http://service.todo.bigws/TodoWebService/addTodoRequest" message="tns:addTodo"/>
-<output wsam:Action="http://service.todo.bigws/TodoWebService/addTodoResponse" message="tns:addTodoResponse"/>
-</operation>
 <operation name="removeTodo">
 <input wsam:Action="http://service.todo.bigws/TodoWebService/removeTodoRequest" message="tns:removeTodo"/>
 <output wsam:Action="http://service.todo.bigws/TodoWebService/removeTodoResponse" message="tns:removeTodoResponse"/>
@@ -41,18 +37,13 @@
 <input wsam:Action="http://service.todo.bigws/TodoWebService/listTodoRequest" message="tns:listTodo"/>
 <output wsam:Action="http://service.todo.bigws/TodoWebService/listTodoResponse" message="tns:listTodoResponse"/>
 </operation>
+<operation name="addTodo">
+<input wsam:Action="http://service.todo.bigws/TodoWebService/addTodoRequest" message="tns:addTodo"/>
+<output wsam:Action="http://service.todo.bigws/TodoWebService/addTodoResponse" message="tns:addTodoResponse"/>
+</operation>
 </portType>
 <binding name="TodoWebServicePortBinding" type="tns:TodoWebService">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-<operation name="addTodo">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
 <operation name="removeTodo">
 <soap:operation soapAction=""/>
 <input>
@@ -63,6 +54,15 @@
 </output>
 </operation>
 <operation name="listTodo">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="addTodo">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -74,7 +74,7 @@
 </binding>
 <service name="TodoWebServiceService">
 <port name="TodoWebServicePort" binding="tns:TodoWebServicePortBinding">
-<soap:address location="http://localhost:8080/todoSOAP"/>
+<soap:address location="http://localhost:8081/todoSOAP"/>
 </port>
 </service>
 </definitions>
