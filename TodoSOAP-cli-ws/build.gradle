@@ -14,7 +14,10 @@ apply plugin: 'com.github.jacobono.wsdl'
 apply plugin: 'com.github.jacobono.jaxb'
 
 apply plugin: 'java'
+apply plugin: 'war'
+
 apply plugin: 'eclipse'
+apply plugin: 'eclipse-wtp'
 
 repositories {
    mavenCentral()                                               
@@ -23,6 +26,7 @@ repositories {
 dependencies {
    jaxws "com.sun.xml.ws:jaxws-rt:2.2.8"
    jaxws "com.sun.xml.ws:jaxws-tools:2.2.8"
+   compile 'com.google.code.gson:gson:2.3'
 }
 
 //
