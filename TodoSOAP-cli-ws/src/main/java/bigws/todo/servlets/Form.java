@@ -36,7 +36,7 @@ public class Form extends HttpServlet  {
 		resp.setContentType("text/html");
 		PrintWriter out = resp.getWriter();
 		String URI = req.getRequestURI();
-		out.println("<html><title>RESULT To Do </title><body>");
+		out.println("<html><title>To Do</title><h1>RESULT To Do</h1><body>");
 		
 		if (URI.contains("add")){
 			String task = req.getParameter("task");
