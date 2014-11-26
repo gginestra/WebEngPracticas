@@ -22,10 +22,17 @@
 	<input type="radio" name="searchBy" value="project">Project<br>
 	<input type="radio" name="searchBy" value="priority">Priority<br>
 	Text : <input size = "20" type = "text" name = "text"/>
-	<input type="submit" value="Submit">
+	<input type="submit" value="Remove">
 	</form>
 	<hr>
-	<h1><button> Update List To do's</button></h1>
+	<form method="post" action="list">
+	<input type="radio" name="searchBy" value="task">Task<br>
+	<input type="radio" name="searchBy" value="context">Context<br>
+	<input type="radio" name="searchBy" value="project">Project<br>
+	<input type="radio" name="searchBy" value="priority">Priority<br>
+	Text : <input size = "20" type = "text" name = "text"/>
+	<input type="submit" value="List To Do">
+	</form>
 	
 	<hr>
 </body>

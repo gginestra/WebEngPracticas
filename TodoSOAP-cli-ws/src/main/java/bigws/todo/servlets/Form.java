@@ -32,10 +32,11 @@ public class Form extends HttpServlet  {
 		
 		TodoWebServiceService todowss = new TodoWebServiceService();
 		TodoWebService todows = todowss.getTodoWebServicePort();
-		ToDoList toDoList = new ToDoList();
 		
-		String res = ""; 
+		resp.setContentType("text/html");
+		PrintWriter out = resp.getWriter();
 		String URI = req.getRequestURI();
+		out.println("<html><title>RESULT To Do </title><body>");
 		
 		if (URI.contains("add")){
 			String task = req.getParameter("task");
@@ -44,35 +45,32 @@ public class Form extends HttpServlet  {
 			String pri = req.getParameter("priority");
 			todows.addTodo(task, pro, cntx, pri);
 			
+			
+			out.println("Task: "+ task +
+					"<br>Context: "+ cntx + 
+					"<br>Project: "+ pro + 
+					"<br>Priority: "+ pri +
+					"<br><br>Ha sido añadido");
+			
 		}else if (URI.contains("remove")){
-			
-			
+			String respuesta; 
+			respuesta = todows.removeTodo(req.getParameter("searchBy"), req.getParameter("text"));
+			out.println(respuesta); 
 			
 		}else if (URI.contains("list")){
+			ToDoList toDoList = new ToDoList();
+			toDoList = todows.listTodo(req.getParameter("searchBy"), req.getParameter("text"));
 			
+			for (ToDoItem item : toDoList.getToDoList()){
+				out.println("Task: "+ item.getTask() +
+						"<br>Context: "+ item.getContext() + 
+						"<br>Project: "+ item.getProject() + 
+						"<br>Priority: "+ item.getPriority() +
+						"<br><br>");
+			}
 		}
-			
-		
-	//	ToDoList toDoList = new ToDoList();
-
-		
-//		toDoList = gson.fromJson(new FileReader(DEFAULT_FILE_NAME), ToDoList.class);
-	//	ToDoItem item = new ToDoItem(task,cntx,pro,pri); 
-//		toDoList.addItem(item);
-		FileWriter output = new FileWriter(DEFAULT_FILE_NAME);
-//		output.write(gson.toJson(toDoList));
-		output.close();
-		
-		resp.setContentType("text/html");
-		PrintWriter out = resp.getWriter();
-		out.println("<html><head><title>To Do</title></head>"
-				+ "<body>Task: "+ task +
-				"<br>Context: "+ cntx + 
-				"<br>Project: "+ pro + 
-				"<br>Priority: "+ pri +
-				"<br><br>Ha sido añadido"+
-				"</body></html>");
+		out.println("</body><a href=\"index.html\" target=\"_self\"> <input type=\"button\" name=\"boton\" value=\"HOME\"/></a></html>");
 	}
-	
+	 
 
 }
