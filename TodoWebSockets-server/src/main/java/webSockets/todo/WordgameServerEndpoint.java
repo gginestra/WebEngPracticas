@@ -16,6 +16,8 @@ import javax.websocket.server.ServerEndpoint;
 public class WordgameServerEndpoint {
 
 	private Logger logger = Logger.getLogger(this.getClass().getName());
+	private final String SEPARADOR = "-"; 
+	private ToDoList todo = new ToDoList(); 
 
 	@OnOpen
 	public void onOpen(Session session) {
@@ -24,7 +26,7 @@ public class WordgameServerEndpoint {
 
 	@OnMessage
 	public String onMessage(String message, Session session) {
-		switch (message) {
+		switch (message.substring(0, message.indexOf(SEPARADOR))) {
 		case "quit":
 			try {
 				session.close(new CloseReason(CloseCodes.NORMAL_CLOSURE,
@@ -33,6 +35,13 @@ public class WordgameServerEndpoint {
 				throw new RuntimeException(e);
 			}
 			break;
+			
+		case "add": 
+			return addTodo(message); 
+		case "remove": 
+			return removeTodo(message);  
+		case "list": 
+			return listTodo(message);
 		}
 		return message;
 	}
@@ -47,4 +56,19 @@ public class WordgameServerEndpoint {
     public void onError(Session session, Throwable t) {
         logger.severe("Connection has been closed");
     }
+	
+
+
+	private String listTodo(String message) {
+	//	Gson gson = new Gson();
+		return ""; 
+	}
+
+	private String removeTodo(String message) {
+		return null;
+	}
+
+	private String addTodo(String message) {
+		return null;
+	}
 }
