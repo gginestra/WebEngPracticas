@@ -1,0 +1,28 @@
+ <style type="text/css">
+ div.fixedHeaderTable {
+     position: relative;
+ }
+ div.fixedHeaderTable table {
+     width:100%;
+ }
+ div.fixedHeaderTable tbody {
+     height: 200px;
+     overflow-y: auto;
+     overflow-x: hidden;
+	 text-align: center;
+ }
+ div.fixedHeaderTable table th {
+     background-color:#CCCCCC;font-weight:bold
+ }
+ div.fixedHeaderTable table td {
+     background-color:#EEEEEE
+ }
+ div.fixedHeaderTable thead td, div.fixedHeaderTable thead th {
+     position:relative;
+ }
+ 
+ .error{
+	color:red; 
+ }
+ 
+</style>
