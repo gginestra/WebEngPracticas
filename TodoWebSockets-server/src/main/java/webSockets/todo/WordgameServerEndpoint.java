@@ -12,12 +12,14 @@ import javax.websocket.Session;
 import javax.websocket.CloseReason.CloseCodes;
 import javax.websocket.server.ServerEndpoint;
 
+import com.google.gson.Gson;
+
 @ServerEndpoint(value = "/game")
 public class WordgameServerEndpoint {
 
 	private Logger logger = Logger.getLogger(this.getClass().getName());
 	private final String SEPARADOR = "-"; 
-	private ToDoList todo = new ToDoList(); 
+	private ToDoList todolist = new ToDoList(); 
 
 	@OnOpen
 	public void onOpen(Session session) {
@@ -60,15 +62,41 @@ public class WordgameServerEndpoint {
 
 
 	private String listTodo(String message) {
-	//	Gson gson = new Gson();
-		return ""; 
+		Gson gson = new Gson();
+		return gson.toJson(todolist.getToDoList()); 
 	}
 
 	private String removeTodo(String message) {
-		return null;
+		Gson gson = new Gson();
+		String[] mensaje = message.split("-");
+		String by = mensaje[1]; 
+		String keyword = mensaje[2]; 
+		for (ToDoItem item : todolist.getToDoList()) {
+			if(by.equals("task")){
+				if(item.getTask().equals(keyword)){
+					todolist.getToDoList().remove(item);
+				}							
+			}else if(by.equals("project")){
+				if(item.getProject().equals(keyword)){
+					todolist.getToDoList().remove(item);
+				} 
+			}else if(by.equals("context")){
+				if(item.getContext().equals(keyword)){
+					todolist.getToDoList().remove(item);
+				} 
+			}else if(by.equals("priority")){
+				if(item.getPriority().equals(keyword)){
+					todolist.getToDoList().remove(item);
+				} 
+			}
+		}
+		return gson.toJson(todolist.getToDoList());
 	}
 
 	private String addTodo(String message) {
-		return null;
+		Gson gson = new Gson();
+		ToDoItem item = gson.fromJson(message.substring(message.indexOf("{"),message.length()), ToDoItem.class);
+		todolist.addItem(item);
+		return gson.toJson(todolist.getToDoList()); 
 	}
 }
