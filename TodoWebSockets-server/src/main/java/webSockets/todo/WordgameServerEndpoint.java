@@ -14,7 +14,7 @@ import javax.websocket.server.ServerEndpoint;
 
 import com.google.gson.Gson;
 
-@ServerEndpoint(value = "/game")
+@ServerEndpoint(value = "/todo")
 public class WordgameServerEndpoint {
 
 	private Logger logger = Logger.getLogger(this.getClass().getName());
@@ -40,7 +40,7 @@ public class WordgameServerEndpoint {
 			
 		case "add": 
 			return addTodo(message); 
-		case "remove": 
+		case "delete": 
 			return removeTodo(message);  
 		case "list": 
 			return listTodo(message);
@@ -56,19 +56,20 @@ public class WordgameServerEndpoint {
 	
 	@OnError
     public void onError(Session session, Throwable t) {
-        logger.severe("Connection has been closed");
+        logger.severe("***Error: " + t.toString());
     }
 	
 
 
 	private String listTodo(String message) {
 		Gson gson = new Gson();
-		return gson.toJson(todolist.getToDoList()); 
+		logger.info("To do listed");
+		return gson.toJson(todolist); 
 	}
 
 	private String removeTodo(String message) {
 		Gson gson = new Gson();
-		String[] mensaje = message.split("-");
+		String[] mensaje = message.split("-");		
 		String by = mensaje[1]; 
 		String keyword = mensaje[2]; 
 		for (ToDoItem item : todolist.getToDoList()) {
@@ -90,13 +91,17 @@ public class WordgameServerEndpoint {
 				} 
 			}
 		}
-		return gson.toJson(todolist.getToDoList());
+		logger.info("To do deleted");
+		return gson.toJson(todolist);
 	}
 
 	private String addTodo(String message) {
 		Gson gson = new Gson();
 		ToDoItem item = gson.fromJson(message.substring(message.indexOf("{"),message.length()), ToDoItem.class);
 		todolist.addItem(item);
-		return gson.toJson(todolist.getToDoList()); 
+		logger.info("To do added");
+		ToDoList todolist_temp = new ToDoList(); 
+		todolist_temp.addItem(item);
+		return gson.toJson(todolist_temp); 
 	}
 }
