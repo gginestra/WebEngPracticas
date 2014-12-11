@@ -1,12 +1,13 @@
 package webSockets.todo;
 
-import java.util.ArrayList;
+
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 
 public class ToDoList {
 
-	private List<ToDoItem> toDoList = new ArrayList<ToDoItem>();
+	private List<ToDoItem> toDoList = new CopyOnWriteArrayList<ToDoItem>();
 
 	public List<ToDoItem> getToDoList() {
 		return toDoList;

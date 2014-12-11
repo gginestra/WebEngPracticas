@@ -44,6 +44,7 @@ function deleteButton(){
 		
 		if(($('#text').val().length != 0) && (i<4)){
 			var by = document.fby.by[i].value;
+			$('#listToDo').find('tbody').find('tr').remove();
 			socket.send("delete-" + by + "-" + keyword);
 			document.fby.by[i].checked = null;
 			$('#text').val('');
@@ -72,7 +73,6 @@ function toJSON(){
 }
 
 function toObject(json){
-	alert(json)
 	var obj = JSON.parse(json);
 	var tasks = obj.toDoList;
 	for( var i in tasks){
